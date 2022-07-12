@@ -1,6 +1,7 @@
 # libraries ----
 library(opendatatoronto)
 library(dplyr)
+library(janitor)
 
 # download dataset ----
 
@@ -17,5 +18,33 @@ datastore_resources <- dplyr::filter(
   resources, tolower(format) %in% c('csv', 'geojson')
   )
 
-# load the 2016 datastore resource 
+# load the 2016 data store resource 
 data_2016 <- filter(datastore_resources, row_number()==2) %>% get_resource()
+
+# clean data ----
+
+# convert into a tidy format 
+data_2016_tidy <- data_2016 %>%
+  janitor::clean_names() %>%
+  
+  select(
+    
+    # get all neighbourhood characteristics 
+    characteristic, 
+    
+    # get all 140 neighborhood profiles in Toronto 
+    agincourt_north:yorkdale_glen_park
+    
+    ) %>%
+  
+  # transpose where: 
+  # all neighbourhood profiles are rows within a single column 
+  # each neighbourhood characteristic becomes a column 
+  t() %>%
+  
+  as.data.frame() %>%
+  
+  # get the first row as the header and clean column names
+  janitor::row_to_names(1) %>%
+  janitor::clean_names()
+  
