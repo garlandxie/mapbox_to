@@ -2,6 +2,8 @@
 library(opendatatoronto)
 library(dplyr)
 library(janitor)
+library(ggplot2)
+library(tibble)
 
 # download dataset ----
 
@@ -47,4 +49,8 @@ data_2016_tidy <- data_2016 %>%
   # get the first row as the header and clean column names
   janitor::row_to_names(1) %>%
   janitor::clean_names()
-  
+
+# assign neighbourhood names as a column
+data_2016_tidy$neighbourhood_name <- rownames(data_2016_tidy)
+
+
