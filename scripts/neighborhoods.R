@@ -143,23 +143,23 @@ data_2016_tidy %>%
   
 # |-- visualize population data ----
 
-## |-- histogram: changes in population between 2011 and 2016 ----
+## |-- histogram: changes in population size between 2011 and 2016 ----
 
 data_2016_tidy %>%
   select(neighbourhood_name, population_change_2011_2016) %>%
-  rename(pop_change_11_16 = population_change_2011_2016) %>%
+  rename(pop_size_change_11_16 = population_change_2011_2016) %>%
   mutate(
     
-    pop_change_11_16 = str_replace(
-      pop_change_11_16, 
+    pop_size_change_11_16 = str_replace(
+      pop_size_change_11_16, 
       pattern = "%", 
       replace = ""), 
     
-    pop_change_11_16 = as.numeric(pop_change_11_16)
+    pop_size_change_11_16 = as.numeric(pop_size_change_11_16)
     
     ) %>%
   
-  ggplot(aes(x = pop_change_11_16)) +
+  ggplot(aes(x = pop_size_change_11_16)) +
   geom_histogram() + 
   geom_vline(xintercept = 0, linetype = "dashed") + 
   labs(x = "Population Change (%) between 2011 and 2016 Census") + 
