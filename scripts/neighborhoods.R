@@ -4,6 +4,7 @@ library(dplyr)
 library(janitor)
 library(ggplot2)
 library(tibble)
+library(stringr)
 
 # download dataset ----
 
@@ -53,10 +54,96 @@ data_2016_tidy <- data_2016 %>%
 # assign neighbourhood names as a column
 data_2016_tidy$neighbourhood_name <- rownames(data_2016_tidy)
 
-# visualiza data ----
+# |- visualize data ----
+
+##  |-- plot: difference between mean total income and after-tax income ----
+data_2016_tidy %>%
+  
+  select(
+    neighbourhood_name, 
+    avg_total_income = total_income_average_amount, 
+    avg_after_tax_income = after_tax_income_average_amount
+  ) %>%
+  
+  mutate(
+    
+    avg_total_income = str_replace(
+      avg_total_income, 
+      pattern = ",", 
+      replace = ""), 
+    
+    avg_after_tax_income = str_replace(
+      avg_after_tax_income, 
+      pattern = ",", 
+      replace = ""), 
+    avg_after_tax_income = as.numeric(avg_after_tax_income)
+  
+    ) %>%
+  
+  mutate(
+    avg_total_income = as.numeric(avg_total_income), 
+    avg_after_tax_income = as.numeric(avg_after_tax_income)
+  ) %>%
+  
+  ggplot(aes(y = neighbourhood_name)) + 
+  geom_point(aes(x = avg_total_income), col = "black") + 
+  geom_point(aes(x = avg_after_tax_income), col = "red") + 
+  labs(
+    x = "Difference between Mean Total Income and After-Tax Income", 
+    y = "Neighbourhood Name") + 
+  theme(axis.text.y = element_blank())
+
+# |-- plot: histogram of total income ----
 
 data_2016_tidy %>%
-  select(total_income = total_income_average_amount) %>%
-  mutate(total_income = as.numeric(total_income)) %>%
-  ggplot(aes(x = total_income)) + 
-  geom_histogram()
+  
+  select(
+    neighbourhood_name, 
+    avg_total_income = total_income_average_amount
+  ) %>%
+  
+  mutate(
+    
+    avg_total_income  = str_replace(
+      avg_total_income , 
+      pattern = ",", 
+      replace = ""), 
+    avg_total_income = as.numeric(avg_total_income)
+    
+  ) %>%
+  
+  ggplot(aes(x = avg_total_income)) + 
+  geom_histogram() + 
+  labs(x = "Mean Total Income") + 
+  theme_bw() 
+
+# |-- plot: histogram of after-tax income ----
+
+data_2016_tidy %>%
+  
+  select(
+    neighbourhood_name, 
+    avg_after_tax_income = after_tax_income_average_amount
+  ) %>%
+  
+  mutate(
+  
+    avg_after_tax_income = str_replace(
+      avg_after_tax_income, 
+      pattern = ",", 
+      replace = ""), 
+    avg_after_tax_income = as.numeric(avg_after_tax_income)
+    
+  ) %>%
+  
+  ggplot(aes(x = avg_after_tax_income)) + 
+  geom_histogram() + 
+  labs(x = "Mean After-Tax Income") + 
+  theme_bw() 
+  
+
+
+
+
+
+
