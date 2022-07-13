@@ -141,7 +141,9 @@ data_2016_tidy %>%
   labs(x = "Mean After-Tax Income") + 
   theme_bw() 
   
-# visualize data: changes in population across years ----
+# |-- visualize population data ----
+
+## |-- histogram: changes in population between 2011 and 2016 ----
 
 data_2016_tidy %>%
   select(neighbourhood_name, population_change_2011_2016) %>%
@@ -162,7 +164,6 @@ data_2016_tidy %>%
   geom_vline(xintercept = 0, linetype = "dashed") + 
   labs(x = "Population Change (%) between 2011 and 2016 Census") + 
   theme_bw()
-
 
 
 
