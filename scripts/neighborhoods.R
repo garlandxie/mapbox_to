@@ -53,4 +53,10 @@ data_2016_tidy <- data_2016 %>%
 # assign neighbourhood names as a column
 data_2016_tidy$neighbourhood_name <- rownames(data_2016_tidy)
 
+# visualiza data ----
 
+data_2016_tidy %>%
+  select(total_income = total_income_average_amount) %>%
+  mutate(total_income = as.numeric(total_income)) %>%
+  ggplot(aes(x = total_income)) + 
+  geom_histogram()
