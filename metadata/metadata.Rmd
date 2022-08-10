@@ -11,10 +11,91 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Demographic variables 
 
-## Population density
+Demographic variables are aggregated to a particular statistical unit 
+(i.e., neighbourhood profiles in Toronto, Canada). As of 2016, there 
+are a total of 140 census tracts that correspond to neighbourhood profiles. 
 
-Link: https://www12.statcan.gc.ca/census-recensement/2016/ref/98-501/98-501-x2016001-eng.cfm
+## Population and dwellings
 
-Definition: Number of people per square kilometre. 
+### Population density 
+
+Definition: Number of people per square kilometer. 
 It is computed by dividing the total population by the land area.
+
+### Population size (Age 65 and older)
+
+Definition: Number of people who are of age 65 (and older)
+
+## Income 
+
+Important notes: 
+- there is no available data for many variables related to median income, 
+- variables related to low-income lines are not measures of poverty; rather, they represent methodology that identifies those who are substantially worse off than the average person
+in that particular neighbourhood profile. 
+
+### Average total income 
+
+Definition: The average total income of a specified group is calculated by 
+dividing the aggregate income of that group (i.e., neighbourhood)
+by the number of units in that group. 
+
+Total income refers to the sum of certain incomes of the statistical unit 
+during a specified reference period. This can include investment income, 
+employment income, private retirement income, 
+government transfers (e.g., employment insurance and pension plans), 
+and income taxes. 
+
+### Average after-tax income
+
+Definition: refers the difference between total income (see above) 
+and income taxes of the statistical unit during a specified reference period. 
+
+### Prevalence of low income (based on after-tax LICO-AT)
+
+Definition: the proportion or percentage of units whose income falls below a 
+specified low-income line (based on after-tax LICO-AT). This line refers to an 
+income threshold where an economic family (or persons) has would likely 
+have spent a larger share of their after-tax income than average 
+on the necessities of food, shelter and clothing. LICOs are derived from the 
+1992 Family Expenditure Survey and then compared to an income survey. 
+Note that there are 35 cut-offs varying by seven family sizes and five different 
+sizes of area of residence to account for economies of scale and potential 
+differences in cost of living in communities of different sizes. 
+
+### Prevalance of low income (based on after-tax LIM-AT)
+
+Definition: the proportion or percentage of units whose income falls below a 
+specified low-income line (based on after-tax LIM-AT). 
+The concept underlying the LIM is that all persons in a household have low 
+income if their adjusted household income falls below half of the median
+adjusted income. The household income is adjusted by an equivalence scale 
+to take economies of scale into account.
+LIMs do not vary by size of area of residence
+
+## Immigration and ethnocultural diversity
+
+### Immigrant population 
+
+Definition: The number of people who are immigrants in a particular statistical unit during a specific reference period. Respondents who mark 'Yes' to the landed immigrant status question (Question 14) are 'immigrants.' Note that for the 2016 Census, the immigrant population
+includes people having immigrated no later than May 10, 2016. 
+
+### Citizen population 
+
+Definition: The number of people who are Canadian citizens in a particular unit during a specific reference period. Note that citizenship can be by birth or naturalization. 
+
+## Housing
+
+### Shelter-to-income ratio (housing affordability)
+
+Definition: Number of people who spent more than 30% of their before-tax 
+household income on shelter costs. Shelter costs include the following: 
+(1) rent and any payments for electricity, fuel, water and other municipal services, 
+(2) mortgage payments (principal and interest), 
+(3) property taxes, and any condominium fees
+
+## Education 
+
+### Lack of postsecondary certificate diploma or degree
+
+Definition: Number of people with no post-secondary certificate diploma or degree
 
