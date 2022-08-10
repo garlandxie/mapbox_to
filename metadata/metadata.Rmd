@@ -95,7 +95,9 @@ household income on shelter costs. Shelter costs include the following:
 
 ## Education 
 
-### Lack of postsecondary certificate diploma or degree
+### No degree (ages 25 and 64)
 
-Definition: Number of people with no post-secondary certificate diploma or degree
+Definition: Number of people between the ages of 25 and 64 with no certificate diploma or degree
+
+
 
