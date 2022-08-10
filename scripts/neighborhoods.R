@@ -62,22 +62,36 @@ data_2016_cand <- data_2016_tidy %>%
   select(
     neighbourhood_name, 
     
-    # population density 
+    # population and dwellings
     pop_density_per_sqkm = population_density_per_square_kilometre,
+    pop_65 = population_age_65_by_family_characteristics,
     
-    # status 
+    # immigration 
     no_of_immigrants = immigrants, 
     no_of_can_citizens = canadian_citizens, 
     
-    # low income 
+    # income 
     prev_lico_at = prevalence_of_low_income_based_on_the_low_income_cut_offs_after_tax_lico_at_percent,
     prev_lim_at = prevalence_of_low_income_based_on_the_low_income_measure_after_tax_lim_at_percent, 
-    spend_30_perc_income_shelter = spending_30_percent_or_more_of_income_on_shelter_costs, 
-    
-    # income 
     avg_total_income = total_income_average_amount, 
-    avg_after_tax_income = after_tax_income_average_amount
+    avg_after_tax_income = after_tax_income_average_amount,
     
+    # housing 
+    spend_30_perc_shelter_costs = spending_30_percent_or_more_of_income_on_shelter_costs, 
+    
+    # education (between ages 25 to 64)
+    no_degree_ages_25_64 = no_certificate_diploma_or_degree_2
+  
+  ) %>%
+  
+  # make sure the variables are all numeric
+  mutate(
+    across(
+      c(pop_density_per_sqkm:no_degree_ages_25_64),
+    ~ as.numeric(
+      str_replace(.x, pattern = ",", replacement = "")
+      )
+    )
   )
 
 
