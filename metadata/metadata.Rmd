@@ -1,0 +1,20 @@
+---
+title: "Metadata"
+author: "Garland Xie"
+date: "10/08/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Demographic variables 
+
+## Population density
+
+Link: https://www12.statcan.gc.ca/census-recensement/2016/ref/98-501/98-501-x2016001-eng.cfm
+
+Definition: Number of people per square kilometre. 
+It is computed by dividing the total population by the land area.
+
