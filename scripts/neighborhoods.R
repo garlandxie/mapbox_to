@@ -54,6 +54,32 @@ data_2016_tidy <- data_2016 %>%
 # assign neighbourhood names as a column
 data_2016_tidy$neighbourhood_name <- rownames(data_2016_tidy)
 
+# extract candidate variables -----
+
+# colnames(data_2016_tidy)[str_detect(colnames(data_2016_tidy), "income")]
+
+data_2016_cand <- data_2016_tidy %>%
+  select(
+    neighbourhood_name, 
+    
+    # population density 
+    pop_density_per_sqkm = population_density_per_square_kilometre,
+    
+    # status 
+    no_of_immigrants = immigrants, 
+    no_of_can_citizens = canadian_citizens, 
+    
+    # low income 
+    prev_lico_at = prevalence_of_low_income_based_on_the_low_income_cut_offs_after_tax_lico_at_percent,
+    prev_lim_at = prevalence_of_low_income_based_on_the_low_income_measure_after_tax_lim_at_percent, 
+    spend_30_perc_income_shelter = spending_30_percent_or_more_of_income_on_shelter_costs, 
+    
+    # income 
+    avg_total_income = total_income_average_amount, 
+    avg_after_tax_income = after_tax_income_average_amount
+    
+  )
+
 # |- visualize income data ----
 
 ##  |-- plot: difference between mean total income and after-tax income ----
@@ -143,7 +169,7 @@ data_2016_tidy %>%
   
 # |-- visualize population data ----
 
-## |-- histogram: changes in population size between 2011 and 2016 ----
+## |-- histogram: changes in population growth between 2011 and 2016 ----
 
 data_2016_tidy %>%
   select(neighbourhood_name, population_change_2011_2016) %>%
@@ -165,6 +191,26 @@ data_2016_tidy %>%
   labs(x = "Population Change (%) between 2011 and 2016 Census") + 
   theme_bw()
 
+## |-- histogram: population density (per sq km) for 2016 Census data ----
+
+data_2016_tidy %>%
+  select(neighbourhood_name, population_density_per_square_kilometre) %>%
+  rename(pop_density = population_density_per_square_kilometre) %>%
+  mutate(
+    
+    pop_density = str_replace(
+      pop_density, 
+      pattern = ",", 
+      replace = ""), 
+    
+    pop_density = as.numeric(pop_density)
+    
+  ) %>%
+  
+  ggplot(aes(x = pop_density)) +
+  geom_histogram() + 
+  labs(x = "Population density") + 
+  theme_bw()
 
 
 
